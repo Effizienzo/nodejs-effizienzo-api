@@ -4,7 +4,7 @@ const app = express();
 
 require('dotenv').config();
 
-const allowedOrigins = ['https://effizienzo.vercel.app'];
+const allowedOrigins = ['https://effizienzo.vercel.app', 'http://localhost:3000'];
 
 const corsOptions = {
     origin: function (origin, callback) {
@@ -17,6 +17,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

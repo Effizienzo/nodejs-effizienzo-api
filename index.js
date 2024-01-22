@@ -14,9 +14,11 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));
         }
     },
+    credentials: true, // Hinzugefügt, um Credentials zu erlauben
 };
 
 app.use(cors(corsOptions));
+
 
 
 app.use(express.urlencoded({ extended: false }));

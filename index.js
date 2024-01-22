@@ -14,12 +14,19 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true, // Hinzugefügt, um Credentials zu erlauben
+    credentials: true,
 };
 
 app.use(cors(corsOptions));
 
-
+// Zusätzliche CORS-Konfiguration für Header
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); // Hier kannst du die erlaubten Ursprünge spezifizieren oder "*" verwenden, um alle zuzulassen
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Credentials", "true");
+    next();
+});
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

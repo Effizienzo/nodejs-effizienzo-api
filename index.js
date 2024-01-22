@@ -4,7 +4,19 @@ const app = express();
 
 require('dotenv').config();
 
-app.use(cors()); // CORS-Middleware aktivieren
+const allowedOrigins = ['https://effizienzo.vercel.app'];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
